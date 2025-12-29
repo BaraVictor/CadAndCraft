@@ -1,0 +1,218 @@
+@import '../../styles/variables';
+
+$dark-text: #1d1d1d;
+$green-brand: #208A39;
+$yellow-brand: #FFC300;
+$white: #ffffff;
+
+.showcase {
+    position: relative;
+    width: 100%;
+    padding: 80px 0;
+    overflow: hidden;
+    background-color: #f0f4f8;
+
+    // --- STARE VIZIBILĂ (Triggered by JS) ---
+    // Când această clasă este adăugată, copiii își încep animația
+    &--visible {
+        .showcase__left {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .showcase__right {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    &__wrapper {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 40px;
+        align-items: center;
+
+        @media (max-width: 1024px) {
+            grid-template-columns: 1fr;
+            gap: 60px;
+        }
+    }
+
+    // --- COLOANA STÂNGA (Initial State & Animation) ---
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 25px; 
+
+        // Stare inițială: invizibil și deplasat la stânga
+        opacity: 0;
+        transform: translateX(-50px);
+        // Tranziție lină
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    &__title {
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 4.5rem;
+        font-weight: 800;
+        line-height: 0.9;
+        color: $dark-text;
+        text-transform: uppercase;
+        margin: 0;
+
+        .stroke-text {
+            color: transparent;
+            -webkit-text-stroke: 2px $dark-text;
+        }
+
+        .subtitle {
+            display: block;
+            font-size: 3.5rem;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 3rem;
+            .subtitle { font-size: 2.5rem; }
+            text-align: center;
+        }
+    }
+
+    &__description-box {
+        position: relative;
+        padding-left: 25px;
+        max-width: 480px;
+        margin-top: 15px; 
+
+        .quote-icon {
+            font-size: 3.5rem;
+            color: $yellow-brand;
+            position: absolute;
+            top: -25px; 
+            left: -5px;
+            z-index: 0;
+            opacity: 1;
+        }
+
+        p {
+            position: relative;
+            z-index: 1;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #444;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            margin: 20px auto 0;
+            text-align: center;
+            padding-left: 0;
+            .quote-icon { left: 50%; transform: translateX(-50%); top: -35px; }
+        }
+    }
+
+    // --- MINI GALERIE ANIMATĂ ---
+    &__gallery {
+        margin-top: 10px;
+        width: 100%;
+        max-width: (140px * 3) + (20px * 2);
+
+        .gallery-viewport {
+            overflow: hidden;
+            width: 100%;
+            padding: 10px 5px;
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 17px;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .gallery-card {
+            position: relative;
+            flex: 0 0 140px; 
+            height: 180px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+
+            &:hover { transform: translateY(-5px); }
+            img { width: 100%; height: 100%; object-fit: cover; }
+            .card-badge {
+                position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+                background-color: $green-brand; color: $white;
+                font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.75rem; font-weight: 700;
+                padding: 4px 10px; border-radius: 20px; white-space: nowrap; text-align: center;
+            }
+        }
+
+        .gallery-controls {
+            display: flex; gap: 10px; margin-top: 10px; justify-content: flex-end;
+            @media (max-width: 768px) { justify-content: center; }
+            .control-btn {
+                background: none; border: none; font-size: 2.2rem;
+                color: rgba($dark-text, 0.4); cursor: pointer; transition: all 0.2s;
+                &:hover { color: $green-brand; transform: scale(1.1); }
+                &:active { transform: scale(0.9); }
+            }
+        }
+    }
+
+    // --- COLOANA DREAPTA (Initial State & Animation) ---
+    &__right {
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        // Stare inițială: invizibil și deplasat la dreapta
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        // Întârziere pentru efectul de cascadă
+        transition-delay: 0.3s; 
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            border-radius: 35px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            @media (max-width: 768px) { height: 350px; }
+
+            .main-image {
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+                opacity: 0; transition: opacity 1s ease-in-out; 
+                &.active { opacity: 1; z-index: 1; }
+            }
+
+            .btn-see-more {
+                position: absolute; top: 30px; right: 30px;
+                background-color: $green-brand; color: $white; border: none;
+                padding: 10px 22px; border-radius: 30px;
+                font-family: 'Courier Prime', monospace; font-weight: 700; font-size: 0.9rem; text-transform: uppercase;
+                display: flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.3s; z-index: 5;
+                &:hover { background-color: darken($green-brand, 5%); transform: translateX(-3px); }
+                .icon { font-size: 1.1rem; transform: rotate(-45deg); }
+            }
+
+            .slider-progress-bar {
+                position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+                display: flex; gap: 10px; z-index: 5;
+                .progress-indicator {
+                    width: 30px; height: 4px; background-color: rgba(255, 255, 255, 0.5);
+                    border-radius: 4px; cursor: pointer; transition: all 0.3s ease;
+                    &.active { width: 50px; background-color: $green-brand; }
+                    &:hover:not(.active) { background-color: rgba(255, 255, 255, 0.8); }
+                }
+            }
+        }
+    }
+}

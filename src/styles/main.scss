@@ -1,0 +1,67 @@
+@import 'variables';
+@import 'mixins';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-body; // Raleway pentru tot textul de bază
+  color: $theme-text-dark;
+  background-color: $theme-white;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading; // Bricolage Grotesque pentru titluri
+  color: $theme-heading; // Albastrul închis sau Verde, în funcție de context
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+// Clase utilitare pentru text (bazat pe cerințele tale)
+.text-highlight {
+    font-family: $font-heading;
+    color: $theme-accent; // Galben
+}
+
+.section-title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    
+    @include mobile {
+        font-size: 2rem;
+    }
+}
+
+// Butoane Standardizate
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-family: $font-heading; // Butoanele au font de titlu de obicei
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    border: none;
+
+    &--primary {
+        background-color: $theme-accent; // Galben
+        color: $theme-heading; // Text închis pe galben
+    }
+
+    &--secondary {
+        background-color: $theme-primary; // Verde
+        color: $theme-white;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+}

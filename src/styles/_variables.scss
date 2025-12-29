@@ -1,0 +1,32 @@
+/* =========================================
+   PALETA CROMATICĂ (Conform Design)
+   ========================================= */
+$color-green:       #208A39; // Verdele principal
+$color-yellow:      #FFC300; // Galbenul (Accent)
+$color-blue-dark:   #003566; // Albastrul închis (Titluri/Nav)
+$color-white-off:   #EBF2FA; // Culoarea deschisă (Fundaluri secundare) - *Nota: pare a fi EBF2FA, nu 3B (care e cyan)*
+$color-black:       #1D1D1D; // Text principal
+
+// Mapări semantice (Cum folosim culorile?)
+$theme-primary:     $color-green;
+$theme-accent:      $color-yellow;
+$theme-text-dark:   $color-black;
+$theme-heading:     $color-blue-dark;
+$theme-bg-light:    $color-white-off;
+$theme-white:       #ffffff;
+
+/* =========================================
+   TIPOGRAFIE
+   ========================================= */
+// Bricolage Grotesque: Titluri, Pop-up-uri, Subtitluri, Cifre
+$font-heading:      'Bricolage Grotesque', sans-serif;
+
+// Raleway: Paragrafe, Text curent
+$font-body:         'Raleway', sans-serif;
+
+/* =========================================
+   DIMENSIUNI & SPACING
+   ========================================= */
+$container-max-width: 1200px;
+$border-radius-std:   12px;
+$section-spacing:     80px;
