@@ -14,16 +14,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Funcție pentru a închide meniul când dăm click pe un link
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
         
-        {/* LOGO - Aici punem SVG-ul tău alb */}
+        {/* LOGO */}
         <div className="navbar__logo">
-            {/* Acesta este SVG-ul simplificat pentru Logo. 
-                Asigură-te că fill este alb ("#fff") */}
             <svg width="205" height="105" viewBox="0 0 205 105" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* ... (Continutul SVG ramane acelasi, verde #208A39) ... */}
+                {/* SVG-ul tău original rămâne aici neschimbat */}
                 <path d="M118.405 37.4244C118.405 41.6766 117.412 44.9495 115.428 47.2431C113.444 49.5238 110.615 50.6641 106.943 50.6641C102.449 50.6641 98.806 47.021 98.806 42.527V31.568C98.806 27.7145 101.93 24.5906 105.783 24.5906C110.01 24.5906 113.167 25.6536 115.254 27.7797C117.354 29.8929 118.405 33.1078 118.405 37.4244ZM112.664 37.4244C112.664 34.4994 112.11 32.3669 111.002 31.0268C109.907 29.6738 108.135 28.9974 105.687 28.9974C105.036 28.9974 104.508 29.5252 104.508 30.1764V44.2859C104.508 45.3747 105.39 46.2573 106.479 46.2573C110.603 46.2573 112.664 43.313 112.664 37.4244Z" fill="#208A39"/>
                 <path d="M95.0361 47.1808C95.5988 48.8983 94.3192 50.6641 92.5119 50.6641C91.3197 50.6641 90.2735 49.8696 89.9533 48.7212L89.6058 47.4749C89.0803 45.5898 87.363 44.2858 85.406 44.2858H83.2139C81.2569 44.2858 79.5396 45.5898 79.0141 47.4749L78.6682 48.7155C78.3471 49.8673 77.2978 50.6641 76.1021 50.6641C74.2887 50.6641 73.0053 48.8917 73.571 47.1689L79.9487 27.7479C80.5673 25.864 82.3259 24.5905 84.3088 24.5905C86.2928 24.5905 88.0521 25.8654 88.6699 27.7508L95.0361 47.1808ZM84.8511 30.4662C84.7281 29.9677 83.8812 29.965 83.7515 30.4619C83.7444 30.4889 83.7373 30.5162 83.7301 30.5436C83.5177 31.383 82.9323 33.5044 81.9737 36.9078C81.5375 38.4564 82.7 39.995 84.3088 39.995C85.9184 39.995 87.0808 38.4548 86.6429 36.906C85.6616 33.4353 85.0644 31.2887 84.8511 30.4662Z" fill="#208A39"/>
                 <path d="M160.471 57.7714C158.304 57.7714 156.548 59.528 156.548 61.695V76.5873C156.548 78.1618 155.271 79.4382 153.697 79.4382C152.122 79.4382 150.846 78.1618 150.846 76.5873V61.695C150.846 59.528 149.089 57.7714 146.922 57.7714H144.554C143.695 57.7714 142.999 57.0753 142.999 56.2167C142.999 55.3581 143.695 54.662 144.554 54.662H162.84C163.699 54.662 164.395 55.3581 164.395 56.2167C164.395 57.0753 163.699 57.7714 162.84 57.7714H160.471Z" fill="#208A39"/>
@@ -35,19 +36,30 @@ const Navbar = () => {
             </svg>
         </div>
 
-        {/* LINKURILE - Stil "Pastilă" */}
+        {/* LINKURILE DESKTOP */}
         <ul className="navbar__menu">
-          <li><a href="#about" className="nav-pill">Despre</a></li>
-          <li><a href="#rules" className="nav-pill">Regulament</a></li>
+          <li><a href="/" className="nav-pill">Acasa</a></li>
+          <li><a href="/about" className="nav-pill">Despre</a></li>
+          <li><a href="/handbook" className="nav-pill">Regulament</a></li>
           <li><a href="#register" className="nav-pill">Inscriere</a></li>
           <li><a href="#team" className="nav-pill">Echipa</a></li>
         </ul>
 
-        {/* Hamburger Mobil */}
+        {/* Hamburger Mobil & Tableta */}
         <div className="navbar__hamburger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           {mobileMenuOpen ? <HiX /> : <HiMenuAlt3 />}
         </div>
       </div>
+
+      {/* MENIU MOBIL - Overlay */}
+      <div className={`navbar__mobile-overlay ${mobileMenuOpen ? 'open' : ''}`}>
+          <a href="/" onClick={closeMobileMenu}>Acasa</a>
+          <a href="/about" onClick={closeMobileMenu}>Despre</a>
+          <a href="/handbook" onClick={closeMobileMenu}>Regulament</a>
+          <a href="#register" onClick={closeMobileMenu}>Inscriere</a>
+          <a href="#team" onClick={closeMobileMenu}>Echipa</a>
+      </div>
+
     </nav>
   );
 };

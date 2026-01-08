@@ -12,8 +12,6 @@ import './Home.scss';
 const Home = () => {
   return (
     <div className="page-home">
-      {/* Navbar poate sta aici sau în App.js dacă e global */}
-      <Navbar />
       
       <main>
         <Hero />
@@ -27,8 +25,6 @@ const Home = () => {
         
         <FAQ />
       </main>
-
-      <Footer />
       
     </div>
   );
