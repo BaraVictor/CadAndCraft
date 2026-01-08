@@ -1,3 +1,5 @@
+// 1. IMPORTUL FONTULUI NOU AICI SUS
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap');
 @import '../../styles/variables';
 
 $yellow-border: #FFC300;
@@ -5,12 +7,11 @@ $bg-pill: rgba(0, 0, 0, 0.4);
 
 .navbar {
   position: fixed;
-  top: 0;
+  top: 20px; 
   left: 0;
   width: 100%;
   
-  // MODIFICARE: 120px -> 130px
-  height: 130px; 
+  height: 140px; 
   
   z-index: 100;
   background-color: transparent;
@@ -28,8 +29,8 @@ $bg-pill: rgba(0, 0, 0, 0.4);
     justify-content: space-between;
     padding: 0 50px;
 
-    @media (max-width: 768px) {
-        padding: 0 20px;
+    @media (max-width: 1024px) {
+        padding: 0 30px;
     }
   }
 
@@ -53,25 +54,28 @@ $bg-pill: rgba(0, 0, 0, 0.4);
     }
   }
 
-  // --- MENIU ---
+  // --- MENIU DESKTOP ---
   &__menu {
     display: flex;
     gap: 30px;
     list-style: none;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       display: none;
     }
   }
 
-  // --- BUTOANE PASTILĂ ---
+  // --- BUTOANE PASTILĂ (Desktop) ---
   .nav-pill {
     text-decoration: none;
     color: #fff;
-    font-family: 'Courier Prime', 'Courier New', monospace; 
+    
+    // 2. AICI AM PUS FONTUL MONTSERRAT
+    font-family: 'Montserrat', sans-serif; 
     font-size: 1.15rem;
-    font-weight: 700;
+    font-weight: 700; // Folosim greutatea bold importată
     letter-spacing: 1px;
+    text-transform: uppercase; // De obicei Montserrat arată bine majuscule în meniuri (opțional)
 
     padding: 12px 35px;
     border: 2px solid $yellow-border;
@@ -94,17 +98,70 @@ $bg-pill: rgba(0, 0, 0, 0.4);
     font-size: 2.5rem;
     cursor: pointer;
     display: none;
+    z-index: 101; 
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       display: block;
+    }
+  }
+
+  // --- MENIU MOBIL / TABLETĂ (OVERLAY) ---
+  &__mobile-overlay {
+    position: fixed;
+    
+    // Fixul pentru spațiul de sus
+    top: -20px; 
+    left: 0;
+    width: 100%;
+    
+    // Fixul pentru înălțime
+    height: calc(100vh + 20px); 
+    
+    background-color: rgba(0, 0, 0, 0.98); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    pointer-events: none;
+    z-index: 99; 
+
+    &.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 2rem;
+      
+      // 3. AM PUS FONTUL ȘI AICI
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; // Extra bold pentru mobil
+      text-transform: uppercase;
+      
+      transition: color 0.3s;
+
+      &:hover {
+        color: $yellow-border;
+      }
     }
   }
 
   // --- STARE SCROLLED ---
   &--scrolled {
     background-color: rgba(255, 255, 255, 0.95);
-    height: 90px; // Aici rămâne compact la scroll
+    height: 90px; 
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    
+    // Resetare top la scroll
+    top: 0; 
 
     .navbar__logo svg path { fill: #003566; }
     
